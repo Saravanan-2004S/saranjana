@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Janani ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:'Poppins',sans-serif;
+background:linear-gradient(135deg,#ffe5ec,#ffb3c6,#ffc2d1);
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+overflow:hidden;
+animation:bg 10s infinite alternate;
+}
+
+@keyframes bg{
+0%{background-position:left;}
+100%{background-position:right;}
+}
+
+.card{
+width:90%;
+max-width:600px;
+background:rgba(255,255,255,.85);
+backdrop-filter:blur(15px);
+padding:30px;
+border-radius:20px;
+box-shadow:0 0 30px rgba(0,0,0,.2);
+text-align:center;
+position:relative;
+z-index:10;
+}
+
+h1{
+font-family:'Dancing Script',cursive;
+font-size:55px;
+color:#ff2d75;
+margin-bottom:20px;
+}
+
+h2{
+color:#ff2d75;
+margin-bottom:20px;
+}
+
+.question{
+font-size:22px;
+margin-bottom:20px;
+font-weight:bold;
+}
+
+.options button{
+width:100%;
+padding:14px;
+margin:8px 0;
+font-size:17px;
+border:none;
+border-radius:10px;
+cursor:pointer;
+background:white;
+transition:.4s;
+border:2px solid #ff2d75;
+}
+
+.options button:hover{
+background:#ff2d75;
+color:white;
+}
+
+#wishes{
+display:none;
+animation:fade 1s;
+}
+
+@keyframes fade{
+from{
+opacity:0;
+transform:scale(.8);
+}
+to{
+opacity:1;
+transform:scale(1);
+}
+}
+
+.message{
+font-size:20px;
+line-height:1.8;
+color:#555;
+}
+
+.heart{
+font-size:60px;
+animation:beat 1s infinite;
+margin-top:20px;
+}
+
+@keyframes beat{
+50%{
+transform:scale(1.2);
+}
+}
+
+.confetti{
+position:absolute;
+top:-20px;
+width:10px;
+height:10px;
+border-radius:50%;
+animation:fall linear infinite;
+}
+
+@keyframes fall{
+100%{
+transform:translateY(110vh) rotate(720deg);
+}
+}
+
+.float-heart{
+position:absolute;
+bottom:-50px;
+font-size:25px;
+animation:fly linear infinite;
+color:#ff2d75;
+}
+
+@keyframes fly{
+100%{
+transform:translateY(-120vh);
+opacity:0;
+}
+}
+
+</style>
+
+</head>
+
+<body>
+
+<audio id="music" loop>
+<source src="song.mp3" type="audio/mpeg">
+</audio>
+
+<div class="card">
+
+<div id="quiz">
+
+<h2>❤️ How Well Do You Know Us? ❤️</h2>
+
+<p class="question" id="question"></p>
+
+<div class="options" id="options"></div>
+
+</div>
+
+<div id="wishes">
+
+<h1>Happy Birthday Janani ❤️</h1>
+<div class="photo-box">
+
+    <img src="janani.jpg" class="lover-photo">
+
+    <!-- Optional Couple Photo -->
+    <!--
+    <img src="together.jpg" class="couple-photo">
+    -->
+
+</div>
+
+<p class="message">
+
+My Dearest Janani ❤️<br><br>
+
+No matter what answers you chose, you will always be the most special person in my life.
+
+Thank you for filling my world with happiness, love, laughter, and countless beautiful memories.
+
+On this wonderful day, I pray that every dream of yours comes true and your smile never fades.
+
+May this birthday bring endless joy, success, good health, and lots of love.
+
+You are my sunshine, my happiness, my peace, and my forever.
+
+I promise to love you today, tomorrow, and always.
+
+Happy Birthday, My Love. ❤️🎂
+
+</p>
+
+<div class="heart">❤️</div>
+
+</div>
+
+</div>
+
+<script>
+
+const quiz=[
+{
+q:"Where is my favourite place Janani?",
+o:["Office","With You ❤️","Home","Beach"]
+},
+{
+q:"Who is the most beautiful girl?",
+o:["Someone Else","Janani ❤️","Movie Actress","Friend"]
+}
+];
+
+let current=0;
+
+const question=document.getElementById("question");
+const options=document.getElementById("options");
+
+const music=document.getElementById("music");
+
+function loadQuestion(){
+
+question.innerHTML=quiz[current].q;
+
+options.innerHTML="";
+
+quiz[current].o.forEach(option=>{
+
+let btn=document.createElement("button");
+
+btn.innerHTML=option;
+
+btn.onclick=nextQuestion;
+
+options.appendChild(btn);
+
+});
+
+}
+
+function nextQuestion(){
+
+music.play().catch(()=>{});
+
+current++;
+
+if(current<quiz.length){
+
+loadQuestion();
+
+}
+else{
+
+document.getElementById("quiz").style.display="none";
+
+document.getElementById("wishes").style.display="block";
+
+confetti();
+
+hearts();
+
+}
+
+}
+
+function confetti(){
+
+let colors=["#ff2d75","#ff85a1","#ffd6e0","#ffffff","#ff5c8a"];
+
+for(let i=0;i<120;i++){
+
+let c=document.createElement("div");
+
+c.className="confetti";
+
+c.style.left=Math.random()*100+"vw";
+
+c.style.width=Math.random()*10+5+"px";
+
+c.style.height=c.style.width;
+
+c.style.background=colors[Math.floor(Math.random()*colors.length)];
+
+c.style.animationDuration=(Math.random()*3+2)+"s";
+
+document.body.appendChild(c);
+
+}
+
+}
+
+function hearts(){
+
+setInterval(()=>{
+
+let h=document.createElement("div");
+
+h.className="float-heart";
+
+h.innerHTML="❤️";
+
+h.style.left=Math.random()*100+"vw";
+
+h.style.fontSize=(20+Math.random()*30)+"px";
+
+h.style.animationDuration=(Math.random()*4+3)+"s";
+
+document.body.appendChild(h);
+
+setTimeout(()=>{
+
+h.remove();
+
+},7000);
+
+},300);
+
+}
+
+loadQuestion();
+
+</script>
+
+</body>
+</html>
